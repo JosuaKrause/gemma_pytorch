@@ -1,1 +1,1 @@
-include gemma/py.typed
+include py.typed

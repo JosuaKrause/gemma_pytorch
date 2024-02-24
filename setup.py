@@ -22,19 +22,20 @@ ROOT_DIR = os.path.dirname(__file__)
 
 
 def get_path(*filepath) -> str:
+    """Gets the path relative to the root folder."""
     return os.path.join(ROOT_DIR, *filepath)
 
 
 def read_readme() -> str:
     """Read the README file."""
-    return io.open(get_path("README.md"), "r", encoding="utf-8").read()
+    with io.open(get_path("README.md"), "r", encoding="utf-8") as fin:
+        return fin.read()
 
 
 def get_requirements() -> List[str]:
     """Get Python package dependencies from requirements.txt."""
-    with open(get_path("requirements.txt")) as f:
-        requirements = f.read().strip().split("\n")
-    return requirements
+    with io.open(get_path("requirements.txt"), "r", encoding="utf-8") as fin:
+        return fin.read().strip().split("\n")
 
 
 setuptools.setup(
@@ -55,7 +56,7 @@ setuptools.setup(
     ],
     packages=setuptools.find_packages(
         exclude=("benchmarks", "docs", "examples", "tests")),
-    package_data={"gemma": ["gemma/py.typed"]},
+    package_data={"gemma": ["py.typed"]},
     include_package_data=True,
     python_requires=">=3.8",
     install_requires=get_requirements(),
