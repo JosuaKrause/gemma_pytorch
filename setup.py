@@ -53,8 +53,9 @@ setuptools.setup(
         "License :: OSI Approved :: Apache Software License",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
     ],
-    packages=setuptools.find_packages(exclude=("benchmarks", "docs",
-                                               "examples", "tests")),
+    packages=setuptools.find_packages(
+        exclude=("benchmarks", "docs", "examples", "tests")),
+    package_data={"gemma": ["gemma/py.typed"]},
     include_package_data=True,
     python_requires=">=3.8",
     install_requires=get_requirements(),
